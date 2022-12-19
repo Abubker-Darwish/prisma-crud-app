@@ -1,6 +1,9 @@
 import { handleExpressApi, successResponse } from '@/services/global';
 import { user } from '@prisma/client';
 import { Request, Response } from 'express';
+import ramda from 'ramda';
+import { UserRequest } from '@/types/global';
+
 import * as actions from './helper';
 
 // ? GET /users
@@ -10,6 +13,15 @@ export const getAllUsers = (req: Request, res: Response) => {
     return successResponse({
       res,
       data: { users },
+    });
+  });
+};
+// ? GET /users/current
+export const getCurrentUser = (req: UserRequest, res: Response) => {
+  handleExpressApi(res, () => {
+    return successResponse({
+      res,
+      data: { user: ramda.omit(['password', 'username'], req.user) || {} },
     });
   });
 };
@@ -38,7 +50,7 @@ export const deleteUser = (req: Request, res: Response) => {
   });
 };
 
-// ? PUT /roles/:id
+// ? PUT /users/:id
 export const updateUser = (
   req: Request<
     { id: string },
@@ -58,7 +70,7 @@ export const updateUser = (
   });
 };
 
-// ? POST /roles/:id
+// ? POST /users/:id
 export const createRole = (
   req: Request<
     unknown,

@@ -7,6 +7,7 @@ import tasksRoutes from '@/routes/tasksRoute';
 import morgan from 'morgan';
 import status from 'http-status';
 import variables from './variables';
+import { login } from './controllers/Auth';
 
 // * target
 // * roles => users => tasks
@@ -26,6 +27,8 @@ app.get('/api', (_, res: Response) => {
   res.status(200).json({ status: 'server is working smoothly' });
 });
 
+// ? auth
+app.post('/api/login', login);
 // ? define routes
 app.use('/api/roles', rolesRoutes);
 app.use('/api/users', usersRoutes);

@@ -25,6 +25,7 @@
     "build": "tsc -p ."
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9",
